@@ -9,6 +9,7 @@ from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
 import pytz
+import base64
 
 # Load environment variables from .env file
 load_dotenv()
@@ -19,6 +20,14 @@ app = Flask(__name__)
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# GitHub configuration
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GITHUB_REPO = os.getenv("GITHUB_REPO")
+GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
+
+GITHUB_API_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}/{GITHUB_REPO}/contents/docs/"
+
 
 # Flask-Mail configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -178,6 +187,84 @@ def raise_complaint():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+#--------------------------------------- DOCS -------------------------------------------------
+
+def upload_to_github(file, filename):
+    try:
+        file_content = file.read()
+        encoded_content = base64.b64encode(file_content).decode('utf-8')
+
+        upload_url = GITHUB_API_URL + filename
+
+        response = requests.put(
+            upload_url,
+            headers={
+                "Authorization": f"token {GITHUB_TOKEN}",
+                "Accept": "application/vnd.github.v3+json",
+            },
+            json={
+                "message": f"Upload {filename}",
+                "content": encoded_content,
+            },
+        )
+
+        if response.status_code in [200, 201]:
+            return response.json()["content"]["download_url"]
+        else:
+            return None
+    except Exception as e:
+        return None
+
+
+@app.route('/api/upload-doc', methods=['POST'])
+def upload_doc():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file provided'}), 400
+
+        file = request.files['file']
+        filename = file.filename
+        category = request.form.get('category', 'General')
+
+        if not filename.endswith('.pdf'):
+            return jsonify({'error': 'Only PDF files are allowed'}), 400
+
+        file_url = upload_to_github(file, filename)
+        if not file_url:
+            return jsonify({'error': 'Failed to upload file to GitHub'}), 500
+
+        result = supabase.table("docs").insert({
+            "name": filename,
+            "category": category,
+            "url": file_url,
+            "uploaded_at": datetime.utcnow().isoformat()
+        }).execute()
+
+        return jsonify({'message': 'File uploaded successfully', 'file_url': file_url}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/get-docs', methods=['GET'])
+def get_docs():
+    try:
+        response = supabase.table("docs").select("*").execute()
+        docs = response.data if response.data else []
+        return jsonify({'docs': docs}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/get-docs/<category>', methods=['GET'])
+def get_docs_by_category(category):
+    try:
+        response = supabase.table("docs").select("*").eq("category", category).execute()
+        docs = response.data if response.data else []
+        return jsonify({'docs': docs}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
