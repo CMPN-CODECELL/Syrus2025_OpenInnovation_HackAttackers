@@ -72,7 +72,10 @@ app.post('/api/upload-doc', upload.single('file'), async (req, res) => {
         const filename = req.file.originalname;
         const category = req.body.category || 'General';
         
-        if (!filename.endsWith('.pdf')) return res.status(400).json({ error: 'Only PDF files are allowed' });
+        if (!filename.trim().toLowerCase().endsWith('.pdf')) {
+            return res.status(400).json({ error: 'Only PDF files are allowed' });
+        }
+        
         
         const fileUrl = await uploadToGithub(req.file.path, filename);
         
