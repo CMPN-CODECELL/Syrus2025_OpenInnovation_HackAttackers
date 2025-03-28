@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 import os
 import pytz
 import base64
+import google.generativeai as genai
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -28,6 +30,9 @@ GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
 
 GITHUB_API_URL = f"https://api.github.com/repos/{GITHUB_USERNAME}/{GITHUB_REPO}/contents/docs/"
 
+# Configure Gemini AI
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
 # Flask-Mail configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -262,6 +267,37 @@ def get_docs_by_category(category):
         response = supabase.table("docs").select("*").eq("category", category).execute()
         docs = response.data if response.data else []
         return jsonify({'docs': docs}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+#------------------------------------- AI CHATBOT ------------------------------------------
+
+@app.route('/api/chatbot', methods=['POST'])
+def chatbot():
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id', 'Anonymous')
+        query = data.get('query')
+
+        if not query:
+            return jsonify({'error': 'Query is required'}), 400
+
+        # Get AI response from Gemini using the latest model
+        model = genai.GenerativeModel("gemini-1.5-pro-latest")
+        response = model.generate_content(query)
+        ai_response = response.text if response else "I'm sorry, I couldn't process your request."
+
+        # Store chat log in Supabase
+        supabase.table("chatbot_logs").insert({
+            "user_id": user_id,
+            "query": query,
+            "response": ai_response,
+            "timestamp": datetime.utcnow().isoformat()
+        }).execute()
+
+        return jsonify({'response': ai_response}), 200
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
