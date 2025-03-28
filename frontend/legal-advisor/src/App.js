@@ -15,6 +15,7 @@ import EmergencyHelpPage from "./pages/EmergencyPageHelp";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";  // Import the Signup page
 import OtpPage from "./pages/OtpPage";
+import DocumentSummariserPage from "./pages/DocumentSummariserPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<SignUpPage />} />  {}
             <Route path="/otp" element={<OtpPage />} />  {}
+            <Route path="/document-summariser" element={<DocumentSummariserPage />} />
           </Routes>
         </div>
         <Footer />
