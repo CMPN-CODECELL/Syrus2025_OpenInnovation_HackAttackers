@@ -15,6 +15,7 @@ function Navbar() {
         <li><Link to="/document-retrieval">Legal Documents</Link></li>
         <li><Link to="/case-tracking">Case Tracking</Link></li>
         <li><Link to="/emergency-help" className="emergency-btn">Emergency Help</Link></li>
+        <li><Link to="/login">Login</Link></li>   
       </ul>
     </nav>
   );

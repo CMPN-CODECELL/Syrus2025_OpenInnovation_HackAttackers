@@ -1,0 +1,150 @@
+/* General Styling */
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: white;
+  color: #222;
+} */
+
+/* Login Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);   
+ 
+}
+
+/* Login Card */
+.login-card {
+  background: #ffffff;
+  padding: 50px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-10px);
+}
+
+.login-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #346fe4;     /* Match Service Button Color */
+  outline: none;
+  box-shadow: 0 0 10px rgba(52, 111, 228, 0.5);
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background:  rgb(51, 51, 51);       /* Match Service Button Color */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s;
+}
+
+.login-btn:hover {
+  background: rgb(207, 206, 206);        /* Hover color */
+  transform: scale(1.05);
+}
+
+/* Footer Links */
+.login-footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.login-footer a {
+  color: #346fe4;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.login-footer a:hover {
+  color: #0033aa;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-card {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .login-card h2 {
+    font-size: 2rem;
+  }
+
+  .footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 25px;
+  }
+
+  .login-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .footer {
+    padding: 15px;
+    font-size: 0.8rem;
+  }
+}

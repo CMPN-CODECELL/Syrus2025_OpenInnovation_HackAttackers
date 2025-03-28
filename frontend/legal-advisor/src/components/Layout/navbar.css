@@ -45,3 +45,15 @@
 .emergency-btn:hover {
   background: #cc0000;
 }
+
+/* .login-btn {
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.login-btn:hover {
+  background: #1a5bb8;
+  transform: scale(1.05);
+} */

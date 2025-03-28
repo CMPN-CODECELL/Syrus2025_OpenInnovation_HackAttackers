@@ -1,0 +1,124 @@
+/* OTP Page Styling */
+.otp-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.otp-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  width: 100%;
+  max-width: 400px;
+}
+
+.otp-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* OTP Input Fields */
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.otp-inputs input {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  transition: 0.3s;
+  outline: none;
+}
+
+.otp-inputs input:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+}
+
+/* OTP Button */
+.otp-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgb(51, 51, 51);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.otp-btn:hover {
+  background: gray;
+}
+
+/* Footer */
+.otp-footer {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.otp-footer .resend-link {
+  color: #2575fc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.otp-footer .resend-link:hover {
+  color: #1a5bb8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .otp-container {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .otp-inputs input {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .otp-btn {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .otp-inputs input {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .otp-container h2 {
+    font-size: 1.5rem;
+  }
+}
