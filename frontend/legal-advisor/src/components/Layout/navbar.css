@@ -23,6 +23,15 @@
 .navbar-links li {
   display: inline;
 }
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 120px; 
+  height: auto;
+}
 
 .navbar-links a {
   text-decoration: none;
