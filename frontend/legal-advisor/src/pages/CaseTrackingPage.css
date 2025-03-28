@@ -1,0 +1,65 @@
+.case-tracking-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.case-card {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.case-card:hover {
+  background: #e0e0e0;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.ongoing {
+  color: orange;
+}
+
+.status.closed {
+  color: green;
+}
+
+.case-history {
+  background: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.case-history ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.case-history li {
+  background: #eee;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.case-history button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
