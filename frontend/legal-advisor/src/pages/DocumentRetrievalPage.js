@@ -1,32 +1,57 @@
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaSearch, FaFileDownload } from "react-icons/fa";
+import apiService from "../services/apiService"; // Import API service
 import "./DocumentRetrievalPage.css";
 
-const allDocuments = [
-  { id: 1, title: "Women's Rights Act 2001", category: "Women", link: "#" },
-  { id: 2, title: "Child Protection Act 2010", category: "Children", link: "#" },
-  { id: 3, title: "Domestic Violence Act 2005", category: "Women", link: "#" },
-  { id: 4, title: "Cyber Crime Laws in India", category: "Cyber", link: "#" },
-  { id: 5, title: "Fundamental Rights of Citizens", category: "General", link: "#" },
-  { id: 6, title: "RTI Act 2005", category: "General", link: "#" },
-  { id: 7, title: "POSH Act 2013", category: "Workplace", link: "#" },
-];
-
-const categories = ["All", "Women", "Children", "Cyber", "General", "Workplace"];
-
 const DocumentRetrievalPage = () => {
+  const [documents, setDocuments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const filteredDocs = allDocuments.filter((doc) =>
-    (selectedCategory === "All" || doc.category === selectedCategory) &&
-    doc.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // Extract unique categories from documents
+  const extractCategories = (docs) => {
+    const uniqueCategories = [
+      "All",
+      ...new Set(
+        docs.map((doc) => doc.category).filter((cat) => cat !== "Nothing")
+      ),
+    ];
+    return uniqueCategories;
+  };
+
+  // Fetch documents from API
+  useEffect(() => {
+    const fetchDocuments = async () => {
+      try {
+        const data = await apiService.getAllDocuments();
+        setDocuments(data.docs); // Ensure data structure matches API response
+      } catch (err) {
+        setError(err.message || "Failed to fetch documents");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDocuments();
+  }, []);
+
+  // Derive categories dynamically from fetched documents
+  const categories = extractCategories(documents);
+
+  // Filter documents based on search and category
+  const filteredDocs = documents.filter(
+    (doc) =>
+      (selectedCategory === "All" || doc.category === selectedCategory) &&
+      doc.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="document-container">
       <h2 className="title">📜 Legal Document Retrieval</h2>
 
+      {/* Search Bar */}
       <div className="search-container">
         <FaSearch className="search-icon" />
         <input
@@ -38,6 +63,7 @@ const DocumentRetrievalPage = () => {
         />
       </div>
 
+      {/* Category Filters */}
       <div className="category-filters">
         {categories.map((category) => (
           <button
@@ -50,20 +76,38 @@ const DocumentRetrievalPage = () => {
         ))}
       </div>
 
+      {/* Display Loading State */}
+      {loading && <p className="loading">Loading documents... ⏳</p>}
+
+      {/* Display Error State */}
+      {error && <p className="error">⚠️ {error}</p>}
+
+      {/* Document List */}
       <div className="document-grid">
-        {filteredDocs.length > 0 ? (
-          filteredDocs.map((doc) => (
-            <div key={doc.id} className="document-card">
-              <h3>{doc.title}</h3>
-              <p>📂 Category: {doc.category}</p>
-              <a href={doc.link} target="_blank" rel="noopener noreferrer">
-                View Document →
-              </a>
-            </div>
-          ))
-        ) : (
-          <p className="no-results">No documents found 📌</p>
-        )}
+        {!loading && !error && filteredDocs.length > 0
+          ? filteredDocs.map((doc) => (
+              <div key={doc.id} className="document-card">
+                <h3>{doc.name}</h3>
+                <p>📂 Category: {doc.category}</p>
+                <div className="document-actions">
+                  <a
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="view-document"
+                  >
+                    View Document →
+                  </a>
+                  <a href={doc.url} download className="download-document">
+                    <FaFileDownload /> Download
+                  </a>
+                </div>
+                <small>
+                  Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}
+                </small>
+              </div>
+            ))
+          : !loading && <p className="no-results">No documents found 📌</p>}
       </div>
     </div>
   );

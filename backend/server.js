@@ -3,12 +3,14 @@ const multer = require('multer');
 const axios = require('axios');
 const { createClient } = require('@supabase/supabase-js');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Moved here
 const fs = require('fs');
 const path = require('path');
 
 dotenv.config();
 
-const app = express();
+const app = express(); // Define `app` first
+app.use(cors()); // Now use `cors`
 app.use(express.json());
 
 const upload = multer({ dest: 'uploads/' });
