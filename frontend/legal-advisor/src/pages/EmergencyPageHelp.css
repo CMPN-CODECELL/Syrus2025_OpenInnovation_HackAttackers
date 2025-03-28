@@ -1,20 +1,126 @@
+/* General Styling */
 .emergency-help-container {
-  text-align: center;
-  height: 70vh;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-button {
-  padding: 10px 15px;
-  background: blue;
+/* Location Section */
+.location-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.location-btn {
+  background-color: #007bff;
   color: white;
   border: none;
-  cursor: pointer;
+  padding: 12px 20px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.emergency-info {
+.location-btn.active {
+  background-color: #28a745;
+}
+
+/* Emergency Contact Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
   margin-top: 20px;
-  background: #f8f8f8;
+}
+
+.contact-card {
+  background: white;
+  border-radius: 10px;
   padding: 15px;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  color: #007bff;
+}
+
+.call-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.call-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.call-btn svg {
+  font-size: 18px;
+}
+
+/* Safety Tips */
+.safety-tips {
+  margin-top: 30px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.safety-tips ul {
+  list-style: none;
+  padding: 0;
+}
+
+.safety-tips li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tip-number {
+  background-color: #007bff;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Disclaimer */
+.disclaimer {
+  margin-top: 20px;
+  background-color: #fff3cd;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ffeeba;
 }
