@@ -1,9 +1,8 @@
-/* src/components/Layout/Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0044cc;
+  background-color: rgb(51, 51, 51);
   padding: 15px 20px;
   color: white;
 }

@@ -1,11 +1,8 @@
-/* src/pages/HomePage.css */
-
 .homepage {
   font-family: Arial, sans-serif;
   color: #222;
 }
 
-/* Hero Section */
 .hero {
   background: url("../../public/assets/hero-bg.jpg") center/cover no-repeat;
   color: white;
@@ -37,7 +34,6 @@
   background: #cc0000;
 }
 
-/* Services Section */
 .services {
   text-align: center;
   padding: 50px 20px;
@@ -71,7 +67,7 @@
 
 .service-btn {
   display: inline-block;
-  background: #0044cc;
+  background: #346fe4;
   color: white;
   padding: 8px 12px;
   text-decoration: none;
@@ -85,9 +81,8 @@
   background: #0033aa;
 }
 
-/* CTA Section */
 .cta {
-  background: #222;
+  background: rgb(51, 51, 51);
   color: white;
   text-align: center;
   padding: 50px 20px;
