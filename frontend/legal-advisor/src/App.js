@@ -17,6 +17,8 @@ import SignUpPage from "./pages/SignUpPage";  // Import the Signup page
 import OtpPage from "./pages/OtpPage";
 import DocumentSummariserPage from "./pages/DocumentSummariserPage";
 import DocumentRetrievalSummaryPage from "./pages/DocumentRetrievalSummaryPage";
+import Profile from "./pages/ProfilePage";
+
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
             <Route path="/otp" element={<OtpPage />} />  {}
             <Route path="/document-summariser" element={<DocumentSummariserPage />} />
             <Route path="/document-summary/:id" element={<DocumentRetrievalSummaryPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
         <Footer />

@@ -1,48 +1,83 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUpPage.css";
 
 function SignUpPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     address: "",
+    phone: "",
+    location: { lat: null, long: null },
   });
+  const [email, setEmail] = useState(""); // Email from localStorage
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    } else {
+      navigate("/login"); // Redirect to login if email is missing
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    // Validation
     if (!formData.name.trim()) {
-      alert("Name is required.");
+      setError("Name is required.");
+      setLoading(false);
       return;
     }
 
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      alert("Please enter a valid email.");
-      return;
+    try {
+      const userId = localStorage.getItem("user_id"); // Retrieve user ID from login
+      if (!userId) {
+        throw new Error("User authentication failed. Please login again.");
+      }
+
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          name: formData.name,
+          phone: formData.phone || null,
+          address: formData.address || null,
+          location: formData.location.lat ? formData.location : null,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Something went wrong");
+
+      alert("Registration successful!");
+      navigate("/"); // Redirect after successful registration
+    } catch (err) {
+      setError(err.message);
     }
 
-    alert(`Signed up successfully with: 
-    Name: ${formData.name}
-    Email: ${formData.email}
-    Address: ${formData.address || "Not provided"}`);
+    setLoading(false);
   };
 
   return (
     <div className="signup-page">
-      {/* Signup Form */}
       <div className="signup-container">
         <div className="signup-card">
           <h2>Sign Up</h2>
+          {error && <p className="error-message">{error}</p>}
           <form onSubmit={handleSubmit}>
-            
-            {/* Name Field */}
             <div className="form-group">
               <label>Name</label>
               <input
@@ -55,20 +90,23 @@ function SignUpPage() {
               />
             </div>
 
-            {/* Email Field */}
+            {/* Display email as read-only */}
             <div className="form-group">
               <label>Email</label>
+              <input type="email" value={email} disabled />
+            </div>
+
+            <div className="form-group">
+              <label>Phone (Optional)</label>
               <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
+                type="text"
+                name="phone"
+                placeholder="Enter your phone number"
+                value={formData.phone}
                 onChange={handleChange}
-                required
               />
             </div>
 
-            {/* Address Field (Optional) */}
             <div className="form-group">
               <label>Address (Optional)</label>
               <input
@@ -80,11 +118,9 @@ function SignUpPage() {
               />
             </div>
 
-            <button type="submit" className="signup-btn">Sign Up</button>
-
-            <div className="signup-footer">
-              <p>Already have an account? <Link to="/login">Login here</Link></p>
-            </div>
+            <button type="submit" className="signup-btn" disabled={loading}>
+              {loading ? "Signing Up..." : "Sign Up"}
+            </button>
           </form>
         </div>
       </div>

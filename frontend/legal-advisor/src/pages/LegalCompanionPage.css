@@ -1,80 +1,273 @@
-.legal-companion-container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
+/* Premium Legal Companion Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #3498db;
+  --accent-hover: #2980b9;
+  --light-gray: #f8f9fa;
+  --dark-gray: #343a40;
+  --text-color: #2c3e50;
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 15px 25px rgba(0, 0, 0, 0.1);
+  --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.18);
+}
+
+body {
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Update the container to have a white background with subtle shadow */
+.legal-companion-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   height: 80vh;
+  transition: all 0.3s ease;
 }
 
 .title {
   text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #444;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 2px;
 }
 
 .chat-box {
   flex: 1;
   overflow-y: auto;
-  padding: 10px;
-  border-radius: 8px;
-  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8f9fa;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   max-height: 65vh;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) transparent;
+}
+
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 6px;
 }
 
 .message {
-  padding: 10px 15px;
-  border-radius: 12px;
+  padding: 14px 18px;
+  border-radius: 18px;
   max-width: 75%;
   word-wrap: break-word;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .user {
   align-self: flex-end;
-  background: #4caf50;
+  background: #3498db;
   color: white;
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
 }
 
 .bot {
   align-self: flex-start;
-  background: #e0e0e0;
-  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow-sm);
+  margin-right: auto;
 }
 
 .input-container {
   display: flex;
-  margin-top: 10px;
-  gap: 10px;
+  margin-top: 20px;
+  gap: 12px;
+  position: relative;
 }
 
 .input-container input {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 15px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+}
+
+.input-container input:focus {
   outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.input-container input::placeholder {
+  color: #aaa;
 }
 
 .input-container button {
-  background: #007bff;
+  background: var(--accent-color);
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
+  padding: 15px 25px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-container button:hover {
-  background: #0056b3;
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.input-container button:active {
+  transform: translateY(0);
+}
+
+.input-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading animation */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  min-width: 60px;
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.6;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation: blink 1s infinite 0.2s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation: blink 1s infinite 0.4s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation: blink 1s infinite 0.6s;
+}
+
+@keyframes blink {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .legal-companion-container {
+    margin: 20px;
+    height: 85vh;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 22px;
+  }
+  
+  .message {
+    max-width: 85%;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legal-companion-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .input-container button {
+    padding: 12px 18px;
+  }
+  
+  .input-container input {
+    padding: 12px 15px;
+  }
 }
