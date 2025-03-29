@@ -31,7 +31,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/legal-companion" element={<LegalCompanionPage />} />
             <Route path="/document-retrieval" element={<DocumentRetrievalPage />} />
-            <Route path="/case-tracking" element={<CaseTrackingPage />} />
+            <Route path="/case-tracking" element={<MyComplains />} />
             <Route path="/emergency-help" element={<EmergencyHelpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<SignUpPage />} />  {}
@@ -39,7 +39,7 @@ function App() {
             <Route path="/document-summariser" element={<DocumentSummariserPage />} />
             <Route path="/document-summary/:id" element={<DocumentRetrievalSummaryPage />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/my-complains" element={<MyComplains />} />
+            <Route path="/my-queries" element={<MyComplains />} />
           </Routes>
         </div>
         <Footer />
