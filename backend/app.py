@@ -294,6 +294,10 @@ def chatbot():
         if not query:
             return jsonify({'error': 'Query is required'}), 400
 
+        # Check if the user_id is "Anonymous" and handle accordingly
+        if user_id == 'Anonymous':
+            user_id = None  # or some default UUID if needed, or leave it as None
+
         # Modify the input to give a legal advisory context
         prompt = (
             "You are a legal advisor. Provide a concise and well-formatted response to the following query:\n\n"
@@ -305,18 +309,20 @@ def chatbot():
         response = model.generate_content(prompt)
         ai_response = response.text.strip() if response else "I'm sorry, I couldn't process your request."
 
-        # Store chat log in Supabase
-        supabase.table("chatbot_logs").insert({
-            "user_id": user_id,
-            "query": query,
-            "response": ai_response,
-            "timestamp": datetime.utcnow().isoformat()
-        }).execute()
+        # Store chat log in Supabase only if the user_id is not None
+        if user_id:
+            supabase.table("chatbot_logs").insert({
+                "user_id": user_id,
+                "query": query,
+                "response": ai_response,
+                "timestamp": datetime.utcnow().isoformat()
+            }).execute()
 
         return jsonify({'response': ai_response}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
     
 
