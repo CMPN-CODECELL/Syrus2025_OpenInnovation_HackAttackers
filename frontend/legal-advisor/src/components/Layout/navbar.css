@@ -292,3 +292,63 @@
     width: 100%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar {
+  background-color: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-links a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-links a:hover {
+  color: #4a6fdc;
+}
+
+.navbar-links a::after {
+  background-color: #4a6fdc;
+}
+
+.emergency-btn {
+  background: rgba(255, 68, 68, 0.9);
+}
+
+.profile-dropdown {
+  background-color: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown a,
+.profile-dropdown .logout-option {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown .logout-option:hover {
+  background-color: rgba(50, 50, 50, 0.7);
+}
+
+.hamburger span {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    background-color: rgba(20, 20, 20, 0.9);
+  }
+}
