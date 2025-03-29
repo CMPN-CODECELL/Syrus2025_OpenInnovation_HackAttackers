@@ -1,22 +1,35 @@
-# 📜 Legal Advisor & Document Summarization System
+KanoonSaathi – Empowering Women & Children Through Legal Assistance
 
-A legal chatbot and document summarization system using **Gemini 1.5 Flash API** to assist users in understanding legal documents easily.
+👥 Team: Hack Attackers
 
----
+📌 Overview
 
-## 🚀 Features Implemented incorporating the feedback
+KanoonSaathi is a comprehensive legal assistance platform designed to empower women and children by providing AI-based legal support, document management, and emergency legal assistance.
 
-### 1️⃣ Legal Advisor Chatbot  
-✅ Uses **Gemini 1.5 Flash API** for **accurate legal responses**.  
-✅ Responses are tailored to be **concise and easy to understand**.  
-✅ Ensures chatbot answers **only legal queries** with **prompt tuning**.  
+🚀 Features
 
-![Document Upload](screenshots/chatbot.png)  
+🔒 Authentication & User Management
 
-### 2️⃣ Document Summarization  
-✅ **User-uploaded documents**: Users can upload their legal documents and get a **summarized version**.  
-✅ **Platform-stored documents**: Summarization of **existing case documents** available on the platform.  
-✅ Uses **Gemini 1.5 Flash API** for **optimized response formatting**.  
+Secure Login & Signup with OTP verification.
 
-![Document Summarizer](screenshots/summarizer.png)  
----
+📄 Legal Document Handling
+
+Document Summariser: Upload legal documents and get AI-generated summaries.
+![Document Summarizer](screenshots/doc-summarizer.png)
+![Document Summarizer](screenshots/document-sum.png)
+
+Document Retrieval: Search for legal documents using keywords.
+![alt text](image.png)
+
+⚖️ Legal Assistance & Case Management
+
+Legal Companion: AI-based chatbot for legal help.
+![Document Summarizer](screenshots/chatbot.png)  
+
+Case Tracking: Track chat summaries and recently uploaded documents with summaries.
+
+
+🆘 Emergency Legal Help
+
+One-click emergency call feature based on your location.
+![alt text](image-1.png)
