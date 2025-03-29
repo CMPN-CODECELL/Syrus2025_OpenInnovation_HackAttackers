@@ -354,5 +354,17 @@ def update_user():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+@app.route('/api/get-chat-logs/<user_id>', methods=['GET'])
+def get_chat_logs(user_id):
+    try:
+        response = supabase.table("chatbot_logs").select("*").eq("user_id", user_id).order("timestamp", desc=True).execute()
+        chat_logs = response.data if response.data else []
+
+        return jsonify({'chat_logs': chat_logs}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)

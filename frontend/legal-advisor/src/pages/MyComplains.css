@@ -1,0 +1,54 @@
+.complains-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.loading,
+.no-complains {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+}
+
+.complains-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.complain-card {
+    padding: 15px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.complain-card:hover {
+    transform: translateY(-3px);
+}
+
+.query,
+.response {
+    font-size: 14px;
+    color: #444;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}

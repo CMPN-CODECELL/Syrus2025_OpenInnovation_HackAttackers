@@ -18,6 +18,7 @@ import OtpPage from "./pages/OtpPage";
 import DocumentSummariserPage from "./pages/DocumentSummariserPage";
 import DocumentRetrievalSummaryPage from "./pages/DocumentRetrievalSummaryPage";
 import Profile from "./pages/ProfilePage";
+import MyComplains from "./pages/MyComplains";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/document-summariser" element={<DocumentSummariserPage />} />
             <Route path="/document-summary/:id" element={<DocumentRetrievalSummaryPage />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/my-complains" element={<MyComplains />} />
           </Routes>
         </div>
         <Footer />

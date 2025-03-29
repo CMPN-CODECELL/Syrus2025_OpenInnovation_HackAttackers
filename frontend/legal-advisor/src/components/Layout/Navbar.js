@@ -98,7 +98,7 @@ function Navbar() {
                 {showDropdown && (
                   <div className="profile-dropdown">
                     <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
-                    <Link to="/my-complaints" onClick={() => setMobileMenuOpen(false)}>My Complaints</Link>
+                    <Link to="/my-complains" onClick={() => setMobileMenuOpen(false)}>My Queries</Link>
                     <div onClick={handleLogout} className="logout-option">Logout</div>
                   </div>
                 )}
