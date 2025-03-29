@@ -37,7 +37,7 @@ function App() {
             <Route path="/otp" element={<OtpPage />} />  {}
             <Route path="/document-summariser" element={<DocumentSummariserPage />} />
             <Route path="/document-summary/:id" element={<DocumentRetrievalSummaryPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
         <Footer />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logo.png"; // Import the logo
+import defaultAvatar from "../../assets/profilee.png";
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
