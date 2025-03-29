@@ -11,12 +11,15 @@ import os
 import pytz
 import base64
 import google.generativeai as genai
+from flask_cors import CORS
+
 
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 # Supabase configuration
 SUPABASE_URL = os.getenv("SUPABASE_URL")
@@ -116,15 +119,23 @@ def verify_otp():
         if otp != user['otp']:
             return jsonify({'error': 'Invalid OTP'}), 400
 
+        # Determine if the user is already registered or new
+        is_registered = user.get("name") != "Pending"
+
         supabase.table("users").update({
             "verified": True,
             "otp": None
         }).eq("email", email).execute()
 
-        return jsonify({'message': 'OTP verified successfully', 'user_id': user['id']}), 200
+        return jsonify({
+            'message': 'OTP verified successfully',
+            'user_id': user['id'],
+            'isRegistered': is_registered
+        }), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/api/register', methods=['POST'])
 def register_user():
@@ -301,6 +312,47 @@ def chatbot():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
+
+#------------------------------------ PROFILE --------------------------------------------------
+
+@app.route('/api/get-user/<user_id>', methods=['GET'])
+def get_user(user_id):
+    try:
+        response = supabase.table("users").select("*").eq("id", user_id).execute()
+        user = response.data[0] if response.data else None
+        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        return jsonify({'user': user}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Update user information
+@app.route('/api/update-user', methods=['PUT'])
+def update_user():
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id')
+        name = data.get('name')
+        phone = data.get('phone')
+        address = data.get('address')
+        location = data.get('location', None)
+
+        if not user_id:
+            return jsonify({'error': 'User ID is required'}), 400
+
+        update_data = {"name": name, "phone": phone, "address": address}
+
+        if location:
+            update_data["location_lat"] = location.get('lat')
+            update_data["location_long"] = location.get('long')
+
+        supabase.table("users").update(update_data).eq("id", user_id).execute()
+
+        return jsonify({'message': 'User updated successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
