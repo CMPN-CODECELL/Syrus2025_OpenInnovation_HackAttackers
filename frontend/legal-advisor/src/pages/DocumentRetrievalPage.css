@@ -1,4 +1,3 @@
-/* General Styles */
 .document-container {
   max-width: 900px;
   margin: 40px auto;
@@ -8,7 +7,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
+
 .title {
   text-align: center;
   font-size: 26px;
@@ -17,7 +16,7 @@
   margin-bottom: 20px;
 }
 
-/* Search Bar */
+
 .search-container {
   display: flex;
   align-items: center;
@@ -41,45 +40,14 @@
   padding: 5px;
 }
 
-/* Category Filters */
-.category-filters {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
 
-.category-filters button {
-  background: #e0e0e0;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.category-filters button:hover {
-  background: #ccc;
-  transform: scale(1.05);
-}
-
-.category-filters button.active {
-  background: #007bff;
-  color: white;
-  font-weight: bold;
-}
-
-/* Document Grid */
 .document-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
-/* Document Cards */
+
 .document-card {
   background: white;
   padding: 18px;
@@ -96,7 +64,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Document Title */
+
 .document-card h3 {
   font-size: 18px;
   color: #333;
@@ -105,52 +73,44 @@
   margin-bottom: 10px;
 }
 
-/* Category */
+
 .document-card p {
   font-size: 14px;
   color: #777;
   margin-bottom: 8px;
 }
 
-/* Document Actions */
 .document-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.document-actions a {
+
+.document-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px;
+  padding: 10px 20px;
   font-size: 14px;
-  text-decoration: none;
   color: white;
-  border-radius: 6px;
+  background: #28a745;  
+  text-decoration: none;
+  border-radius: 8px;
   font-weight: bold;
-  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.view-document {
-  background: #007bff;
+.document-btn:hover {
+  background: #1e7e34;  
+  transform: translateY(-3px);
 }
 
-.view-document:hover {
-  background: #0056b3;
-}
 
-.download-document {
-  background: #28a745;
-}
-
-.download-document:hover {
-  background: #1e7e34;
-}
-
-/* Uploaded Date */
 small {
   display: block;
   margin-top: 12px;
@@ -158,7 +118,7 @@ small {
   color: #666;
 }
 
-/* No Results */
+
 .no-results {
   text-align: center;
   color: #888;
@@ -166,7 +126,7 @@ small {
   margin-top: 20px;
 }
 
-/* Loading */
+
 .loading {
   text-align: center;
   font-size: 16px;
