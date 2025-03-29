@@ -294,10 +294,16 @@ def chatbot():
         if not query:
             return jsonify({'error': 'Query is required'}), 400
 
+        # Modify the input to give a legal advisory context
+        prompt = (
+            "You are a legal advisor. Provide a concise and well-formatted response to the following query:\n\n"
+            f'"{query}"'
+        )
+
         # Get AI response from Gemini using the latest model
         model = genai.GenerativeModel("gemini-1.5-pro-latest")
-        response = model.generate_content(query)
-        ai_response = response.text if response else "I'm sorry, I couldn't process your request."
+        response = model.generate_content(prompt)
+        ai_response = response.text.strip() if response else "I'm sorry, I couldn't process your request."
 
         # Store chat log in Supabase
         supabase.table("chatbot_logs").insert({
@@ -311,6 +317,7 @@ def chatbot():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
     
 
 #------------------------------------ PROFILE --------------------------------------------------
