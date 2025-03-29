@@ -4,7 +4,7 @@ A legal chatbot and document summarization system using **Gemini 1.5 Flash API**
 
 ---
 
-## 🚀 Features Implemented
+## 🚀 Features Implemented incorporating the feedback
 
 ### 1️⃣ Legal Advisor Chatbot  
 ✅ Uses **Gemini 1.5 Flash API** for **accurate legal responses**.  
